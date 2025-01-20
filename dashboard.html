@@ -1,0 +1,659 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>HotPhotato</title>
+  <link rel="icon" type="image/x-icon" href="/assets/img/logo.png">
+  <!-- General CSS Files -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+<!-- CSS Libraries -->
+<!-- <link rel="stylesheet" href="../node_modules/jqvmap/dist/jqvmap.min.css"> -->
+<!-- <link rel="stylesheet" href="../node_modules/summernote/dist/summernote-bs4.css"> -->
+<!-- <link rel="stylesheet" href="../node_modules/owl.carousel/dist/assets/owl.carousel.min.css"> -->
+<!-- <link rel="stylesheet" href="../node_modules/owl.carousel/dist/assets/owl.theme.default.min.css"> -->
+
+<!-- Template CSS -->
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    // document.getElementById('logout-link').addEventListener('click', function (event) {
+
+
+    function logout() {
+        // Prevent the default link behavior
+        event.preventDefault();
+
+        // Show SweetAlert confirmation dialog
+        Swal.fire({
+            title: 'Logout',
+            text: 'Are you sure you want to logout?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#94cd33ed',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, logout!'
+        }).then((result) => {
+            // If the user clicks "Yes, logout!", perform the logout action
+            if (result.isConfirmed) {
+                // Perform your logout action here, for example, redirect to the logout route
+                window.location.href = '/admin/logout';
+            }
+        });
+        // });
+    }
+</script>
+<!-- General JS Scripts -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="../assets/js/stisla.js"></script>
+
+<!-- JS Libraies -->
+
+<!-- Template JS File -->
+<script src="../assets/js/scripts.js"></script>
+<script src="../assets/js/custom.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+<!-- <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<!-- <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script> -->
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+
+
+<!-- Page Specific JS File -->
+<script src="../assets/js/page/index.js"></script>
+  <style>
+    .alert {
+      position: absolute;
+      z-index: 9999;
+      color: rgb(255, 255, 255);
+      background-color: #68b752ed;
+      right: 40px;
+      top: 75px;
+      padding: 15px;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      font-size: 16px;
+      overflow: hidden;
+    }
+
+    .alert .progress-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 5px;
+      background-color: #ffffff;
+      width: 100%;
+      animation: shrink 3s linear forwards;
+    }
+
+    @keyframes shrink {
+      from {
+        width: 100%;
+      }
+
+      to {
+        width: 0%;
+      }
+    }
+  </style>
+</head>
+
+
+
+<body>
+  <div id="app">
+    <div class="main-wrapper">
+      <div class="navbar-bg">
+        <nav class="navbar navbar-expand-lg main-navbar">
+  <form class="form-inline mr-auto">
+    <ul class="navbar-nav mr-3">
+      <li>
+        <a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"
+          ><i class="fas fa-bars"></i
+        ></a>
+      </li>
+    </ul>
+  </form>
+
+  <ul class="navbar-nav navbar-right">
+    <li class="dropdown">
+      <a
+        href="#"
+        data-toggle="dropdown"
+        class="nav-link dropdown-toggle nav-link-lg nav-link-user"
+      >
+        <img
+          alt="image"
+          src="/images/3e0fb998-8405-475d-b734-5fe9d66e70b4.jpg"
+          class="rounded-circle"
+          height="35px"
+        />
+        <div class="d-sm-none d-lg-inline-block"></div>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a href="/admin/admin_profile" class="dropdown-item has-icon">
+          <i class="fas fa-user"></i> Profile
+        </a>
+        <a href="/admin/Change_Password" class="dropdown-item has-icon">
+          <i class="fas fa-key"></i> Change password
+        </a>
+        <a
+          href="/admin/logout"
+          id="logout-link"
+          onclick="logout()"
+          class="dropdown-item has-icon text-danger"
+        >
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+      </div>
+    </li>
+  </ul>
+</nav>
+<style>
+  .main-navbar {
+    background: linear-gradient(to bottom, #dc5151, #b1833e);
+  }
+
+  .nav-link,
+  .dropdown-item {
+    color: #000000;
+  }
+
+  .navbar-nav .dropdown-menu {
+    background-color: #ffffff;
+  }
+
+  .nav-link.nav-link-lg {
+    font-size: 1.2rem;
+  }
+
+  .dropdown-menu {
+    min-width: 180px;
+  }
+
+  .nav-link.nav-link-user img {
+    border-radius: 50%;
+    height: 35px;
+  }
+
+  .dropdown-item i {
+    margin-right: 10px;
+  }
+
+  .navbar-nav .nav-link,
+  .navbar-nav .dropdown-item {
+    padding: 10px 15px;
+  }
+
+  .navbar-nav .dropdown-item:hover {
+    background-color: transparent;
+  }
+
+  @media (max-width: 1024px) {
+      .navbar-right {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+      }
+      .navbar{
+        width: 100%;
+        position: inherit;
+        flex-wrap: nowrap;
+        left: inherit;
+        right: inherit;
+      }
+    }
+</style>
+
+        <div class="main-sidebar">
+  <aside id="sidebar-wrapper">
+    <div class="sidebar-brand pt-3 px-3" style="padding-bottom: 10px">
+      <a href="/admin/dashboard">
+        <img
+          src="/assets/img/logo.png"
+          class=""
+          style="border-radius: 50%; width: 60px; height: 60px"
+        />
+      </a>
+      <a href="#" data-toggle="sidebar" class="nav-link nav-link-lg mobile_toggle">
+        <i class="fas fa-bars"></i>
+      </a>
+    </div>
+    <br />
+
+    <div class="sidebar-brand sidebar-brand-sm" style="padding-bottom: 10px">
+      <a href="/admin/dashboard">
+        <img
+          src="/assets/img/logo.png"
+          class=""
+          style="
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            transition: all 0.2s ease;
+          "
+        />
+      </a>
+    </div>
+
+    <br />
+    <ul class="sidebar-menu" style="max-height: calc(100vh - 60px)">
+      <li class="active">
+        <a class="nav-link" href="/admin/dashboard">
+          <i class="fas fa-home" style="font-size: large"></i>
+          <span><b>Dashboard</b></span>
+        </a>
+      </li>
+
+      <li class="">
+        <a class="nav-link" href="/admin/user_list">
+          <i class="fas fa-users" style="font-size: large"></i>
+          <span><b>Users</b></span>
+        </a>
+      </li>
+
+      <li class="">
+        <a class="nav-link" href="/admin/music_list">
+          <i class="fas fa-music" style="font-size: large"></i>
+          <span><b>Music</b></span>
+        </a>
+      </li>
+
+      <li class="">
+        <a class="nav-link" href="/admin/challenge_list">
+          <i class="fas fa-flag-checkered" style="font-size: large"></i>
+          <span><b>Challenge</b></span>
+        </a>
+      </li>
+
+      <li class="">
+        <a class="nav-link" href="/admin/contact_list">
+          <i class="fas fa-envelope" style="font-size: large"></i>
+          <span><b>Contact Us</b></span>
+        </a>
+      </li>
+
+      <li class="">
+        <a class="nav-link" href="/admin/faq_list">
+          <i class="fas fa-question-circle" style="font-size: large"></i>
+          <span><b>FAQ's</b></span>
+        </a>
+      </li>
+
+          <li class="">
+            <a class="nav-link" href="/admin/bannerList">
+              <i class="fas fa-chess-board" style="font-size: large"></i>
+              <span><b>Banners</b></span>
+            </a>
+          </li>
+
+
+          <li class="">
+            <a class="nav-link" href="/admin/terms_condition">
+              <i class="fas fa-leaf" style="font-size: large"></i>
+              <span><b>Terms & Conditions</b></span>
+            </a>
+          </li>
+
+          <li class="">
+            <a class="nav-link" href="/admin/privacy_policy">
+              <i class="fas fa-hands" style="font-size: large"></i>
+              <span><b>Privacy Policy</b></span>
+            </a>
+          </li>
+          
+          <li class="">
+            <a class="nav-link" href="/admin/Aboutus">
+              <i class="fas fa-book" style="font-size: large"></i>
+              <span><b>About Us</b></span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+    </ul>
+  </aside>
+</div>
+
+<style>
+/* Sidebar fixes */
+.main-sidebar {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100vh;
+  position: fixed;
+  background: #fff; /* Optional: ensure background color is set */
+  width: 250px; /* Adjust width as needed */
+} 
+
+.sidebar-menu {
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  padding-bottom: 20px;
+}
+
+.sidebar-menu li {
+  list-style: none;
+}
+
+.sidebar-menu a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  transition: background 0.3s ease;
+}
+
+.sidebar-menu a:hover {
+  background: #f4f4f4;
+  border-radius: 4px;
+}
+
+.sidebar-menu .active {
+  background: #e0e0e0;
+  font-weight: bold;
+}
+
+/* General Sidebar Links */
+.main-sidebar .sidebar-menu li a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    letter-spacing: 0.3px;
+    color: #474b4e;
+    text-decoration: none;
+  }
+  
+  .mobile_toggle{
+    display: none;
+    line-height: 1;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .mobile_toggle{
+      display: block;
+    }
+    .mobile_toggle i {
+      font-size: 18px;
+    }
+  }
+</style>
+
+        <!-- Main Content -->
+<div class="main-content">
+  <section class="section">
+    <div
+      class="section-header d-flex justify-content-between align-items-center"
+    >
+      <h1>Admin Dashboard</h1>
+    </div>
+    <div class="row">
+      <!-- Users Card -->
+      <div class="col-lg-3 col-md-6 col-sm-6 col-12 animate-left">
+        <a href="/admin/user_list">
+          <div
+            class="card card-statistic-1"
+            style="background: linear-gradient(135deg, #66e8ff, #9999ff)"
+          >
+            <div class="card-icon" style="background: rgba(56, 56, 187, 0.8)">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="card-wrap">
+              <div class="card-header">
+                <h4 style="color: white; font-weight: bold"><b>Users</b></h4>
+              </div>
+              <div
+                class="card-body"
+                id="user"
+                value="1"
+                style="color: white; font-weight: bold"
+              >
+                1
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-sm-6 col-12 animate-left">
+        <a href="/admin/music_list">
+          <div
+            class="card card-statistic-1"
+            style="background: linear-gradient(135deg, #ff7eb3, #8e44ad)"
+          >
+            <div class="card-icon" style="background: rgba(142, 68, 173, 0.9)">
+              <i class="fas fa-music"></i>
+            </div>
+            <div class="card-wrap">
+              <div class="card-header">
+                <h4 style="color: white; font-weight: bold"><b>Music</b></h4>
+              </div>
+              <div
+                class="card-body"
+                id="music"
+                value="1"
+                style="color: white; font-weight: bold"
+              >
+                1
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- challenge Card -->
+      <div class="col-lg-3 col-md-6 col-sm-6 col-12 animate-right">
+        <a href="/admin/challenge_list">
+          <div
+            class="card card-statistic-1"
+            style="background: linear-gradient(135deg, #ff4d4d, #ffa31a)">
+            <div class="card-icon" 
+              style="background: rgba(215, 86, 0, 0.9)"> 
+              <i class="fas fa-flag-checkered"></i>
+            </div>
+            <div class="card-wrap">
+              <div class="card-header">
+                <h4 style="color: white; font-weight: bold"><b>Challenge</b></h4>
+              </div>
+              <div
+                class="card-body"
+                id="challenge"
+                value="1"
+                style="color: white; font-weight: bold"
+              >
+                1
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-sm-6 col-12 animate-right">
+        <a href="/admin/contact_list">
+          <div
+            class="card card-statistic-1"
+            style="background: linear-gradient(135deg, #33cc33, #66ff66)"
+          >
+            <div class="card-icon" style="background: rgba(44, 176, 44, 0.8)">
+              <i class="far fa-address-book"></i>
+            </div>
+            <div class="card-wrap">
+              <div class="card-header">
+                <h4 style="color: white; font-weight: bold">
+                  <b>Contact Us</b>
+                </h4>
+              </div>
+              <div
+                id="contactUs"
+                value="4"
+                class="card-body"
+                style="color: white; font-weight: bold"
+              >
+                4
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+       <!-- FAQ  Card -->
+       <div class="col-lg-3 col-md-6 col-sm-6 col-12 animate-left">
+        <a href="/admin/faq_list">
+          <div
+            class="card card-statistic-1"
+            style="background: linear-gradient(135deg, #33b8cc, #54e6e1)"
+          >
+            <div class="card-icon" style="background: rgba(44, 176, 174, 0.8)">
+              <i class="fas fa-question-circle"></i>
+            </div>
+            <div class="card-wrap">
+              <div class="card-header">
+                <h4 style="color: white; font-weight: bold">
+                  <b>FAQ</b>
+                </h4>
+              </div>
+              <div
+                id="faq"
+                value="4"
+                class="card-body"
+                style="color: white; font-weight: bold"
+              >
+                4
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+         <div class="col-lg-3 col-md-6 col-sm-6 col-12 animate-left">
+          <a href="/admin/bannerList">
+            <div
+              class="card card-statistic-1"
+              style="background: linear-gradient(135deg, #33cc99, #1de380)"
+            >
+              <div class="card-icon" style="background: rgba(38, 151, 114, 0.8)">
+                <i class="fas fa-chess-board"></i>
+              </div>
+              <div class="card-wrap">
+                <div class="card-header">
+                  <h4 style="color: white; font-weight: bold"><b>Banners</b></h4>
+                </div>
+                <div id="banner" value="1"  class="card-body" style="color: white; font-weight: bold">
+                  1
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>  
+
+    </div>
+  </section>
+</div>
+
+<style>
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+</style>
+
+<script>
+  setTimeout(function () {
+    $("div.msg").fadeOut();
+  }, 2000);
+</script>
+
+        <footer class="main-footer">
+  <div class="footer-left">
+  </div>
+  <div class="footer-right">
+    2.3.0
+  </div>
+</footer>
+</div>
+</div>
+
+        
+
+
+
+
+
+
+
+<script src="/assets/js/page/index.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
+
+
+
+<script>
+    setTimeout(function () {
+        $("div.msg").fadeOut();
+    }, 2000);
+</script>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const alertElement = document.querySelector(".alert");
+      if (alertElement) {
+        setTimeout(() => {
+          alertElement.style.transition = "opacity 0.5s";
+          alertElement.style.opacity = "0";
+          setTimeout(() => alertElement.remove(), 500);
+        }, 3000);
+      }
+    });
+  </script>
+</body>
+
+</html>
